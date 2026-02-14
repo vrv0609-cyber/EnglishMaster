@@ -1,0 +1,103 @@
+# This project was generated with 0.3.26 using template: https://github.com/beeware/briefcase-template @ v0.3.26
+[tool.briefcase]
+project_name = "English Master"
+bundle = "com.vrv.englishmaster"
+version = "0.0.1"
+url = "https://englishmaster.vrv.com/englishmaster"
+license.file = "LICENSE"
+author = "Vasilev Renat"
+author_email = "vasilevrenat@outlook.com"
+
+[tool.briefcase.app.englishmaster]
+formal_name = "English Master"
+description = "My first application"
+long_description = """More details about the app should go here.
+"""
+sources = [
+    "src/englishmaster",
+]
+test_sources = [
+    "tests",
+]
+
+requires = [
+    # Add your cross-platform app requirements here
+]
+test_requires = [
+    # Add your cross-platform test requirements here
+]
+
+[tool.briefcase.app.englishmaster.macOS]
+universal_build = true
+requires = [
+    # Add your macOS-specific app requirements here
+]
+
+[tool.briefcase.app.englishmaster.linux]
+requires = [
+    # Add your Linux-specific app requirements here
+]
+
+[tool.briefcase.app.englishmaster.linux.system.debian]
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+
+[tool.briefcase.app.englishmaster.linux.system.rhel]
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+
+[tool.briefcase.app.englishmaster.linux.system.suse]
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+
+[tool.briefcase.app.englishmaster.linux.system.arch]
+system_requires = [
+    # Add any system packages needed at build the app here
+]
+
+system_runtime_requires = [
+    # Add any system packages needed at runtime here
+]
+
+[tool.briefcase.app.englishmaster.linux.flatpak]
+flatpak_runtime = "org.freedesktop.Platform"
+flatpak_runtime_version = "25.08"
+flatpak_sdk = "org.freedesktop.Sdk"
+
+[tool.briefcase.app.englishmaster.windows]
+requires = [
+    # Add your Windows-specific app requirements here
+]
+
+# Mobile deployments
+[tool.briefcase.app.englishmaster.iOS]
+requires = [
+    'sympy==1.11.1',
+]
+
+[tool.briefcase.app.englishmaster.android]
+requires = [
+    # Add your Android-specific app requirements here
+]
+
+# Web deployments
+[tool.briefcase.app.englishmaster.web]
+requires = [
+    # Add your web-specific app requirements here
+]
+
