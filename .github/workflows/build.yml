@@ -34,17 +34,22 @@ jobs:
         run: |
           briefcase build iOS Xcode --no-input --update
       
-      - name: Find and upload iOS app
+      - name: Locate and prepare .app file
         run: |
-          echo "=== Searching for .app file ==="
-          find . -name "*.app" -type d
+          echo "=== Поиск .app файла ==="
+          APP_PATH=$(find . -name "*.app" -type d | head -1)
+          echo "Найдено приложение: $APP_PATH"
           
-          # Копируем приложение в известное место для загрузки
-          mkdir -p output
-          cp -R $(find . -name "*.app" -type d | head -1) output/ || echo "No app found"
+          if [ -n "$APP_PATH" ]; then
+            echo "✅ Приложение найдено по пути: $APP_PATH"
+            echo "APP_PATH=$APP_PATH" >> $GITHUB_ENV
+          else
+            echo "❌ Приложение не найдено!"
+            exit 1
+          fi
       
       - name: Upload iOS app
         uses: actions/upload-artifact@v4
         with:
           name: English-Master-App
-          path: output/
+          path: ${{ env.APP_PATH }}
