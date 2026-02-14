@@ -34,10 +34,21 @@ jobs:
         run: |
           briefcase build iOS Xcode --no-input --update
       
+      - name: Find built app
+        run: |
+          echo "=== Searching for .app file ==="
+          find . -name "*.app" -type d
+          
+          echo "=== Listing iOS/Xcode directory ==="
+          ls -la iOS/Xcode/ || echo "iOS/Xcode not found"
+          
+          echo "=== Listing build directories ==="
+          find iOS -name "build" -type d | xargs ls -la || echo "No build dirs found"
+      
       - name: Upload iOS app
         uses: actions/upload-artifact@v4
         with:
-          name: iOS-App-Simulator
+          name: iOS-App
           path: |
-            iOS/Xcode/build/Release-iphonesimulator/*.app
+            **/*.app
             !**/*.dSYM
