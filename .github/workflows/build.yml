@@ -7,9 +7,6 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-env:
-  FORCE_COLOR: "1"
-
 jobs:
   build-ios:
     name: Build for iOS
@@ -33,19 +30,14 @@ jobs:
         run: |
           briefcase create iOS --no-input
       
-      - name: Build iOS app
+      - name: Build iOS app (for simulator)
         run: |
-          briefcase build iOS Xcode --no-input --adhoc-sign --update
-      
-      - name: Upload build logs (if failed)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-logs
-          path: logs/
+          briefcase build iOS Xcode --no-input --update
       
       - name: Upload iOS app
         uses: actions/upload-artifact@v4
         with:
-          name: iOS-App
-          path: iOS/Xcode/build/Release-iphonesimulator/*.app
+          name: iOS-App-Simulator
+          path: |
+            iOS/Xcode/build/Release-iphonesimulator/*.app
+            !**/*.dSYM
