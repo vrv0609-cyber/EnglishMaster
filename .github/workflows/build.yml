@@ -34,21 +34,17 @@ jobs:
         run: |
           briefcase build iOS Xcode --no-input --update
       
-      - name: Find built app
+      - name: Find and upload iOS app
         run: |
           echo "=== Searching for .app file ==="
           find . -name "*.app" -type d
           
-          echo "=== Listing iOS/Xcode directory ==="
-          ls -la iOS/Xcode/ || echo "iOS/Xcode not found"
-          
-          echo "=== Listing build directories ==="
-          find iOS -name "build" -type d | xargs ls -la || echo "No build dirs found"
+          # Копируем приложение в известное место для загрузки
+          mkdir -p output
+          cp -R $(find . -name "*.app" -type d | head -1) output/ || echo "No app found"
       
       - name: Upload iOS app
         uses: actions/upload-artifact@v4
         with:
-          name: iOS-App
-          path: |
-            **/*.app
-            !**/*.dSYM
+          name: English-Master-App
+          path: output/
